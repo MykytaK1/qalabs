@@ -1,11 +1,15 @@
 package com.lnu.qa.firstlab.controllers;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
 
-@Log4j
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
 @AllArgsConstructor
 public class WealthController {
+    private final Logger log = LogManager.getLogger(WealthController.class.getName());
+
     private HouseController houseController;
     private VehicleController vehicleController;
 

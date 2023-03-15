@@ -1,14 +1,16 @@
 package com.lnu.qa.firstlab.controllers;
 
 import com.lnu.qa.firstlab.models.Fruit;
-import lombok.extern.log4j.Log4j;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-@Log4j
+
 public class FruitController {
+    private final Logger log = LogManager.getLogger(FruitController.class.getName());
     private final List<Fruit> fruits = new ArrayList<>();
 
     public List<Fruit> retrieveAllFruits() {

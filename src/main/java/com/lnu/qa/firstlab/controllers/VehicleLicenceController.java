@@ -4,11 +4,15 @@ package com.lnu.qa.firstlab.controllers;
 import com.lnu.qa.firstlab.models.Car;
 import com.lnu.qa.firstlab.models.Licence;
 import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
 
-@Log4j
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
 @AllArgsConstructor
 public class VehicleLicenceController {
+    private final Logger log = LogManager.getLogger(VehicleLicenceController.class.getName());
+
     private VehicleController vehicleController;
     private LicenceController licenceController;
 
