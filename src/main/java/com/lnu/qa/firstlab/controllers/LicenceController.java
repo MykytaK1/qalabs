@@ -1,13 +1,13 @@
 package com.lnu.qa.firstlab.controllers;
 
 import com.lnu.qa.firstlab.models.Licence;
+import com.lnu.qa.firstlab.utils.RandomUtils;
 import lombok.AllArgsConstructor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 
 @AllArgsConstructor
@@ -24,7 +24,7 @@ public class LicenceController {
         if (licence.getId() != null) {
             throw new RuntimeException("Entity already exists with id: %s".formatted(licence.getId()));
         }
-        licence.setId(UUID.randomUUID().toString());
+        licence.setId(RandomUtils.generateUUID());
         licences.add(licence);
         log.info("Licence is saved with id: %s".formatted(licence.getId()));
         return licence;

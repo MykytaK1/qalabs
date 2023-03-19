@@ -1,7 +1,6 @@
 package com.lnu.qa.firstlab.controllers;
 
 import lombok.RequiredArgsConstructor;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,7 +13,12 @@ public class HarvestController {
 
 
     public double getHarvestIndex() {
-        log.info("eeee");
-        return (double) fruitController.retrieveAllFruits().size() / treeController.retrieveAllTrees().size();
+        log.info("Calculate harvest index");
+        int fruits = fruitController.retrieveAllFruits().size();
+        int trees = treeController.retrieveAllTrees().size();
+        if (fruits == 0 || trees == 0) {
+            throw new RuntimeException("Not enough data to calculate the harvest index");
+        }
+        return (double) Math.round(10000 * ((double) fruits / trees)) / 10000;
     }
 }

@@ -4,7 +4,7 @@ import com.lnu.qa.firstlab.models.Road;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+import com.lnu.qa.firstlab.utils.RandomUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,7 +22,7 @@ public class RoadController {
         if (Road.getId() != null) {
             throw new RuntimeException("Entity already exists with id: %s".formatted(Road.getId()));
         }
-        Road.setId(UUID.randomUUID().toString());
+        Road.setId(RandomUtils.generateUUID());
         Roads.add(Road);
         log.info("Road is saved with id: %s".formatted(Road.getId()));
         return Road;

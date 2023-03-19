@@ -14,8 +14,8 @@ public class TrafficController {
     private VehicleController vehicleController;
 
 
-    public double getCarsPerRoad() {
-        return (double) vehicleController.retrieveAllCars().size() / roadController.retrieveAllRoads().size();
+    public double getVehiclesPerRoad() {
+        return (double) vehicleController.retrieveAllVehicles().size() / roadController.retrieveAllRoads().size();
     }
 
 }

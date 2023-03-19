@@ -16,9 +16,9 @@ import java.util.stream.IntStream;
 import static org.mockito.Mockito.when;
 
 @Listeners(MockitoTestNGListener.class)
-public class HarvestControllerTest {
+public class WealthControllerTest {
 
-    private final Logger log = Logger.getLogger(HarvestControllerTest.class);
+    private final Logger log = Logger.getLogger(WealthControllerTest.class);
 
     @Mock
     private FruitController fruitController;
@@ -26,7 +26,7 @@ public class HarvestControllerTest {
     private TreeController treeController;
 
     @InjectMocks
-    private HarvestController harvestController;
+    private WealthController wealthController;
 
 
     private static List<Fruit> buildFruits(int count) {
@@ -37,7 +37,7 @@ public class HarvestControllerTest {
         return IntStream.range(0, count).mapToObj(String::valueOf).map(Tree::new).toList();
     }
 
-    private static double calculateExpectedHarvestIndex(int trees, int fruits) {
+    private static double calculateExpectedWealthIndex(int trees, int fruits) {
         return (double) Math.round(10000 * ((double) fruits / trees)) / 10000;
     }
 
@@ -52,23 +52,23 @@ public class HarvestControllerTest {
         //NOP
     }
 
-    @DataProvider(name = "harvest-data-provider")
+    @DataProvider(name = "wealth-data-provider")
     public Object[][] dpMethod() {
         return new Object[][]{
-                {buildTrees(945), buildFruits(3), calculateExpectedHarvestIndex(3, 945)},
-                {buildTrees(5474), buildFruits(23), calculateExpectedHarvestIndex(23, 5474)},
-                {buildTrees(12), buildFruits(789), calculateExpectedHarvestIndex(789, 12)},
-                {buildTrees(3), buildFruits(1), calculateExpectedHarvestIndex(1, 3)},
+                {buildTrees(945), buildFruits(3), calculateExpectedWealthIndex(3, 945)},
+                {buildTrees(5474), buildFruits(23), calculateExpectedWealthIndex(23, 5474)},
+                {buildTrees(12), buildFruits(789), calculateExpectedWealthIndex(789, 12)},
+                {buildTrees(3), buildFruits(1), calculateExpectedWealthIndex(1, 3)},
         };
     }
 
-    @Test(dataProvider = "harvest-data-provider")
-    public void shouldCalculateHarvestIndex(Object[] params) {
+    @Test(dataProvider = "wealth-data-provider")
+    public void shouldCalculateWealthIndex(Object[] params) {
         //Given
         when(fruitController.retrieveAllFruits()).thenReturn((List<Fruit>) params[0]);
         when(treeController.retrieveAllTrees()).thenReturn((List<Tree>) params[1]);
         //Then
-        Assert.assertEquals(harvestController.getHarvestIndex(), params[2]);
+        Assert.assertEquals(wealthController.getWealthIndex(), params[2]);
     }
 
     @Test
@@ -77,7 +77,7 @@ public class HarvestControllerTest {
         when(fruitController.retrieveAllFruits()).thenReturn(Collections.emptyList());
         when(treeController.retrieveAllTrees()).thenReturn(buildTrees(1));
         //Then
-        Assert.assertThrows(RuntimeException.class, () -> harvestController.getHarvestIndex());
+        Assert.assertThrows(RuntimeException.class, () -> wealthController.getWealthIndex());
     }
 
     @Test
@@ -86,7 +86,7 @@ public class HarvestControllerTest {
         when(fruitController.retrieveAllFruits()).thenReturn(buildFruits(1));
         when(treeController.retrieveAllTrees()).thenReturn(Collections.emptyList());
         //Then
-        Assert.assertThrows(RuntimeException.class, () -> harvestController.getHarvestIndex());
+        Assert.assertThrows(RuntimeException.class, () -> wealthController.getWealthIndex());
     }
 
 }

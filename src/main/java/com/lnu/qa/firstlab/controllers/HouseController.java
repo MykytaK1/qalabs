@@ -4,7 +4,9 @@ import com.lnu.qa.firstlab.models.House;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+import com.lnu.qa.firstlab.utils.RandomUtils;
+
+import com.lnu.qa.firstlab.utils.RandomUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -22,7 +24,7 @@ public class HouseController {
         if (House.getId() != null) {
             throw new RuntimeException("Entity already exists with id: %s".formatted(House.getId()));
         }
-        House.setId(UUID.randomUUID().toString());
+        House.setId(RandomUtils.generateUUID());
         Houses.add(House);
         log.info("House is saved with id: %s".formatted(House.getId()));
         return House;

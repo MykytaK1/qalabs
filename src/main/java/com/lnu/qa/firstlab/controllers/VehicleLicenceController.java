@@ -1,7 +1,7 @@
 package com.lnu.qa.firstlab.controllers;
 
 
-import com.lnu.qa.firstlab.models.Car;
+import com.lnu.qa.firstlab.models.Vehicle;
 import com.lnu.qa.firstlab.models.Licence;
 import lombok.AllArgsConstructor;
 
@@ -16,12 +16,12 @@ public class VehicleLicenceController {
     private VehicleController vehicleController;
     private LicenceController licenceController;
 
-    public Licence activateLicenceForCar(String carId, String licenceId) {
-        log.info("Activate licence: %s fro car: %s".formatted(licenceId, carId));
-        Car carById = vehicleController.getCarById(carId);
+    public Licence activateLicenceForVehicle(String vehicleId, String licenceId) {
+        log.info("Activate licence: %s fro vehicle: %s".formatted(licenceId, vehicleId));
+        Vehicle vehicleById = vehicleController.getVehicleById(vehicleId);
         Licence licenceById = licenceController.getLicenceById(licenceId);
-        if (carId != null && licenceById != null) {
-            licenceById.getCars().add(carById);
+        if (vehicleId != null && licenceById != null) {
+            licenceById.getVehicles().add(vehicleById);
         }
         return licenceById;
     }

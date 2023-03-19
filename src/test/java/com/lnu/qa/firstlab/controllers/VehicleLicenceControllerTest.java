@@ -16,9 +16,9 @@ import java.util.stream.IntStream;
 import static org.mockito.Mockito.when;
 
 @Listeners(MockitoTestNGListener.class)
-public class HarvestControllerTest {
+public class VehicleLicenceControllerTest {
 
-    private final Logger log = Logger.getLogger(HarvestControllerTest.class);
+    private final Logger log = Logger.getLogger(VehicleLicenceControllerTest.class);
 
     @Mock
     private FruitController fruitController;

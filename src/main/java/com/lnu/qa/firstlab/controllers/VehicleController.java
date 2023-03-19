@@ -1,42 +1,42 @@
 package com.lnu.qa.firstlab.controllers;
 
-import com.lnu.qa.firstlab.models.Car;
+import com.lnu.qa.firstlab.models.Vehicle;
+import com.lnu.qa.firstlab.utils.RandomUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class VehicleController {
 
     private final Logger log = LogManager.getLogger(VehicleController.class.getName());
-    private final List<Car> cars = new ArrayList<>();
+    private final List<Vehicle> vehicles = new ArrayList<>();
 
-    public List<Car> retrieveAllCars() {
-        return cars;
+    public List<Vehicle> retrieveAllVehicles() {
+        return vehicles;
     }
 
-    public Car saveCar(Car car) {
-        log.info("Attempt to save the Car: %s".formatted(car));
-        if (car.getId() != null) {
-            throw new RuntimeException("Entity already exists with id: %s".formatted(car.getId()));
+    public Vehicle saveVehicle(Vehicle vehicle) {
+        log.info("Attempt to save the Vehicle: %s".formatted(vehicle));
+        if (vehicle.getId() != null) {
+            throw new RuntimeException("Entity already exists with id: %s".formatted(vehicle.getId()));
         }
-        car.setId(UUID.randomUUID().toString());
-        cars.add(car);
-        log.info("Car is saved with id: %s".formatted(car.getId()));
-        return car;
+        vehicle.setId(RandomUtils.generateUUID());
+        vehicles.add(vehicle);
+        log.info("Vehicle is saved with id: %s".formatted(vehicle.getId()));
+        return vehicle;
     }
 
-    public Car getCarById(String id) {
-        log.info("Attempt to take the Car by id: %s".formatted(id));
-        Car resultCar = cars.stream().filter(car -> car.getId().equals(id)).findFirst().orElse(null);
-        if (resultCar != null) {
-            log.info("Car was found: %s".formatted(resultCar));
+    public Vehicle getVehicleById(String id) {
+        log.info("Attempt to take the Vehicle by id: %s".formatted(id));
+        Vehicle resultVehicle = vehicles.stream().filter(vehicle -> vehicle.getId().equals(id)).findFirst().orElse(null);
+        if (resultVehicle != null) {
+            log.info("Vehicle was found: %s".formatted(resultVehicle));
         } else {
-            log.info("Car wasn't found");
+            log.info("Vehicle wasn't found");
         }
-        return resultCar;
+        return resultVehicle;
     }
 
 

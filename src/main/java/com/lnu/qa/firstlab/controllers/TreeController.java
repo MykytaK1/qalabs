@@ -1,42 +1,59 @@
 package com.lnu.qa.firstlab.controllers;
 
+import com.lnu.qa.firstlab.models.Fruit;
 import com.lnu.qa.firstlab.models.Tree;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+import com.lnu.qa.firstlab.utils.RandomUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 
 public class TreeController {
     private final Logger log = LogManager.getLogger(TreeController.class.getName());
-    private final List<Tree> Trees = new ArrayList<>();
+    private final List<Tree> trees = new ArrayList<>();
 
     public List<Tree> retrieveAllTrees() {
-        return Trees;
+        return trees;
     }
 
-    public Tree saveTree(Tree Tree) {
-        log.info("Attempt to save the Tree: %s".formatted(Tree));
-        if (Tree.getId() != null) {
-            throw new RuntimeException("Entity already exists with id: %s".formatted(Tree.getId()));
+    public Tree saveTree(Tree tree) {
+        log.info("Attempt to save the Tree: %s".formatted(tree));
+        if (tree.getId() != null) {
+            throw new RuntimeException("Entity already exists with id: %s".formatted(tree.getId()));
         }
-        Tree.setId(UUID.randomUUID().toString());
-        Trees.add(Tree);
-        log.info("Tree is saved with id: %s".formatted(Tree.getId()));
-        return Tree;
+        tree.setId(RandomUtils.generateUUID());
+        trees.add(tree);
+        log.info("Tree is saved with id: %s".formatted(tree.getId()));
+        return tree;
     }
 
     public Tree getTreeById(String id) {
         log.info("Attempt to take the Tree by id: %s".formatted(id));
-        Tree resultTree = Trees.stream().filter(Tree -> Tree.getId().equals(id)).findFirst().orElse(null);
+        Tree resultTree = findTreeById(id);
         if (resultTree != null) {
             log.info("Tree was found: %s".formatted(resultTree));
         } else {
             log.info("Tree wasn't found");
         }
         return resultTree;
+    }
+
+    private Tree findTreeById(String id) {
+        return trees.stream().filter(tree -> tree.getId().equals(id)).findFirst().orElse(null);
+    }
+
+    public Tree removeFruitById(String id) {
+        log.info("Attempt to remove the Fruit by id: %s".formatted(id));
+        Tree removedFruit = findTreeById(id);
+        if (removedFruit != null) {
+            trees.remove(removedFruit);
+            log.info("Fruit was removed: {}", removedFruit);
+        } else {
+            log.info("Fruit wasn't found");
+        }
+        return removedFruit;
     }
 
 

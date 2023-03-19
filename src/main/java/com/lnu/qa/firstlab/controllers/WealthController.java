@@ -14,7 +14,7 @@ public class WealthController {
     private VehicleController vehicleController;
 
 
-    public double getCarsPerHouse() {
-        return (double) vehicleController.retrieveAllCars().size() / houseController.retrieveAllHouses().size();
+    public double getVehiclesPerHouse() {
+        return (double) vehicleController.retrieveAllVehicles().size() / houseController.retrieveAllHouses().size();
     }
 }
