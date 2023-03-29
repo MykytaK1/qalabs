@@ -38,17 +38,15 @@ public class LicenceControllerTest {
     @Test
     public void shouldSaveLicence() {
         //Given
-        String name = RandomUtils.generateUUID();
-        var licence = new Licence(name);
+        var licence = new Licence();
         //When
         Licence savedLicence = licenceController.saveLicence(licence);
         //Then
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(savedLicence.getId().length() > 0);
-        softAssert.assertEquals(savedLicence.getName(), name);
-        var foundLicencesByName = licenceController.retrieveAllLicences().stream().filter(fr -> fr.getName().equals(name)).toList();
-        softAssert.assertEquals(foundLicencesByName.size(), 1);
-        softAssert.assertEquals(foundLicencesByName.get(0), savedLicence);
+        var foundLicencesById = licenceController.retrieveAllLicences().stream().filter(fr -> fr.getId().equals(savedLicence.getId())).toList();
+        softAssert.assertEquals(foundLicencesById.size(), 1);
+        softAssert.assertEquals(foundLicencesById.get(0), savedLicence);
         softAssert.assertAll();
     }
 
@@ -64,8 +62,8 @@ public class LicenceControllerTest {
         String name_1 = RandomUtils.generateUUID();
         String name_2 = RandomUtils.generateUUID();
         //When
-        Licence savedLicence_1 = licenceController.saveLicence(new Licence(name_1));
-        Licence savedLicence_2 = licenceController.saveLicence(new Licence(name_2));
+        Licence savedLicence_1 = licenceController.saveLicence(new Licence());
+        Licence savedLicence_2 = licenceController.saveLicence(new Licence());
         //Then
         List<Licence> allLicences = licenceController.retrieveAllLicences();
         SoftAssert softAssert = new SoftAssert();
@@ -75,19 +73,9 @@ public class LicenceControllerTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenAttemptToSaveLicenceWithId() {
-        //Given
-        var licence = new Licence(RandomUtils.generateUUID());
-        licence.setId("id");
-        //Then
-        Assert.expectThrows(RuntimeException.class, () -> licenceController.saveLicence(licence));
-    }
-
-    @Test
     public void shouldGetLicenceById() {
         //Given
-        String name = RandomUtils.generateUUID();
-        var licence = new Licence(name);
+        var licence = new Licence();
         Licence savedLicence = licenceController.saveLicence(licence);
         //When
         Licence licenceById = licenceController.getLicenceById(savedLicence.getId());
@@ -107,14 +95,14 @@ public class LicenceControllerTest {
     public void shouldRemoveLicenceById() {
         //Given
         String name = RandomUtils.generateUUID();
-        var licence = new Licence(name);
+        var licence = new Licence();
         Licence savedLicence = licenceController.saveLicence(licence);
         //When
         Licence licenceById = licenceController.removeLicenceById(savedLicence.getId());
         //Then
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(licenceById, savedLicence);
-        var foundLicencesByName = licenceController.retrieveAllLicences().stream().filter(fr -> fr.getName().equals(name)).findFirst();
+        var foundLicencesByName = licenceController.retrieveAllLicences().stream().filter(fr -> fr.getId().equals(name)).findFirst();
         softAssert.assertTrue(foundLicencesByName.isEmpty());
         softAssert.assertAll();
     }

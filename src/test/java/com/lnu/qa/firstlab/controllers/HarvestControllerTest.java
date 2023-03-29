@@ -37,7 +37,7 @@ public class HarvestControllerTest {
         return IntStream.range(0, count).mapToObj(String::valueOf).map(Tree::new).toList();
     }
 
-    private static double calculateExpectedHarvestIndex(int trees, int fruits) {
+    private static double calculateExpectedHarvestIndex(int fruits, int trees) {
         return (double) Math.round(10000 * ((double) fruits / trees)) / 10000;
     }
 
@@ -65,8 +65,8 @@ public class HarvestControllerTest {
     @Test(dataProvider = "harvest-data-provider")
     public void shouldCalculateHarvestIndex(Object[] params) {
         //Given
-        when(fruitController.retrieveAllFruits()).thenReturn((List<Fruit>) params[0]);
-        when(treeController.retrieveAllTrees()).thenReturn((List<Tree>) params[1]);
+        when(treeController.retrieveAllTrees()).thenReturn((List<Tree>) params[0]);
+        when(fruitController.retrieveAllFruits()).thenReturn((List<Fruit>) params[1]);
         //Then
         Assert.assertEquals(harvestController.getHarvestIndex(), params[2]);
     }

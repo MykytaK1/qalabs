@@ -1,7 +1,7 @@
 package com.lnu.qa.firstlab.controllers;
 
-import com.lnu.qa.firstlab.models.Fruit;
-import com.lnu.qa.firstlab.models.Tree;
+import com.lnu.qa.firstlab.models.House;
+import com.lnu.qa.firstlab.models.Vehicle;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.testng.MockitoTestNGListener;
@@ -21,24 +21,24 @@ public class WealthControllerTest {
     private final Logger log = Logger.getLogger(WealthControllerTest.class);
 
     @Mock
-    private FruitController fruitController;
+    private HouseController houseController;
     @Mock
-    private TreeController treeController;
+    private VehicleController vehicleController;
 
     @InjectMocks
     private WealthController wealthController;
 
 
-    private static List<Fruit> buildFruits(int count) {
-        return IntStream.range(0, count).mapToObj(String::valueOf).map(Fruit::new).toList();
+    private static List<House> buildHouses(int count) {
+        return IntStream.range(0, count).mapToObj(String::valueOf).map(House::new).toList();
     }
 
-    private static List<Tree> buildTrees(int count) {
-        return IntStream.range(0, count).mapToObj(String::valueOf).map(Tree::new).toList();
+    private static List<Vehicle> buildVehicles(int count) {
+        return IntStream.range(0, count).mapToObj(String::valueOf).map(Vehicle::new).toList();
     }
 
-    private static double calculateExpectedWealthIndex(int trees, int fruits) {
-        return (double) Math.round(10000 * ((double) fruits / trees)) / 10000;
+    private static double calculateExpectedWealthIndex(int vehicles, int houses) {
+        return (double) Math.round(10000 * ((double) vehicles / houses)) / 10000;
     }
 
 
@@ -55,36 +55,36 @@ public class WealthControllerTest {
     @DataProvider(name = "wealth-data-provider")
     public Object[][] dpMethod() {
         return new Object[][]{
-                {buildTrees(945), buildFruits(3), calculateExpectedWealthIndex(3, 945)},
-                {buildTrees(5474), buildFruits(23), calculateExpectedWealthIndex(23, 5474)},
-                {buildTrees(12), buildFruits(789), calculateExpectedWealthIndex(789, 12)},
-                {buildTrees(3), buildFruits(1), calculateExpectedWealthIndex(1, 3)},
+                {buildVehicles(945), buildHouses(3), calculateExpectedWealthIndex(3, 945)},
+                {buildVehicles(5474), buildHouses(23), calculateExpectedWealthIndex(23, 5474)},
+                {buildVehicles(12), buildHouses(789), calculateExpectedWealthIndex(789, 12)},
+                {buildVehicles(3), buildHouses(1), calculateExpectedWealthIndex(1, 3)},
         };
     }
 
     @Test(dataProvider = "wealth-data-provider")
     public void shouldCalculateWealthIndex(Object[] params) {
         //Given
-        when(fruitController.retrieveAllFruits()).thenReturn((List<Fruit>) params[0]);
-        when(treeController.retrieveAllTrees()).thenReturn((List<Tree>) params[1]);
+        when(houseController.retrieveAllHouses()).thenReturn((List<House>) params[0]);
+        when(vehicleController.retrieveAllVehicles()).thenReturn((List<Vehicle>) params[1]);
         //Then
         Assert.assertEquals(wealthController.getWealthIndex(), params[2]);
     }
 
     @Test
-    public void shouldReturnZeroIfNoFruitsAvailable() {
+    public void shouldReturnZeroIfNoHousesAvailable() {
         //Given
-        when(fruitController.retrieveAllFruits()).thenReturn(Collections.emptyList());
-        when(treeController.retrieveAllTrees()).thenReturn(buildTrees(1));
+        when(houseController.retrieveAllHouses()).thenReturn(Collections.emptyList());
+        when(vehicleController.retrieveAllVehicles()).thenReturn(buildVehicles(1));
         //Then
         Assert.assertThrows(RuntimeException.class, () -> wealthController.getWealthIndex());
     }
 
     @Test
-    public void shouldReturnZeroIfNoTreesAvailable() {
+    public void shouldReturnZeroIfNoVehiclesAvailable() {
         //Given
-        when(fruitController.retrieveAllFruits()).thenReturn(buildFruits(1));
-        when(treeController.retrieveAllTrees()).thenReturn(Collections.emptyList());
+        when(houseController.retrieveAllHouses()).thenReturn(buildHouses(1));
+        when(vehicleController.retrieveAllVehicles()).thenReturn(Collections.emptyList());
         //Then
         Assert.assertThrows(RuntimeException.class, () -> wealthController.getWealthIndex());
     }

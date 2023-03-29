@@ -1,7 +1,7 @@
 package com.lnu.qa.firstlab.controllers;
 
-import com.lnu.qa.firstlab.models.Fruit;
-import com.lnu.qa.firstlab.models.Tree;
+import com.lnu.qa.firstlab.models.Road;
+import com.lnu.qa.firstlab.models.Vehicle;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.testng.MockitoTestNGListener;
@@ -21,24 +21,24 @@ public class TrafficControllerTest {
     private final Logger log = Logger.getLogger(TrafficControllerTest.class);
 
     @Mock
-    private FruitController fruitController;
+    private RoadController roadController;
     @Mock
-    private TreeController treeController;
+    private VehicleController vehicleController;
 
     @InjectMocks
-    private HarvestController harvestController;
+    private TrafficController trafficController;
 
 
-    private static List<Fruit> buildFruits(int count) {
-        return IntStream.range(0, count).mapToObj(String::valueOf).map(Fruit::new).toList();
+    private static List<Road> buildRoads(int count) {
+        return IntStream.range(0, count).mapToObj(String::valueOf).map(Road::new).toList();
     }
 
-    private static List<Tree> buildTrees(int count) {
-        return IntStream.range(0, count).mapToObj(String::valueOf).map(Tree::new).toList();
+    private static List<Vehicle> buildVehicles(int count) {
+        return IntStream.range(0, count).mapToObj(String::valueOf).map(Vehicle::new).toList();
     }
 
-    private static double calculateExpectedHarvestIndex(int trees, int fruits) {
-        return (double) Math.round(10000 * ((double) fruits / trees)) / 10000;
+    private static double calculateExpectedTrafficIndex(int Vehicles, int Roads) {
+        return (double) Math.round(10000 * ((double) Roads / Vehicles)) / 10000;
     }
 
 
@@ -52,41 +52,41 @@ public class TrafficControllerTest {
         //NOP
     }
 
-    @DataProvider(name = "harvest-data-provider")
+    @DataProvider(name = "traffic-data-provider")
     public Object[][] dpMethod() {
         return new Object[][]{
-                {buildTrees(945), buildFruits(3), calculateExpectedHarvestIndex(3, 945)},
-                {buildTrees(5474), buildFruits(23), calculateExpectedHarvestIndex(23, 5474)},
-                {buildTrees(12), buildFruits(789), calculateExpectedHarvestIndex(789, 12)},
-                {buildTrees(3), buildFruits(1), calculateExpectedHarvestIndex(1, 3)},
+                {buildVehicles(945), buildRoads(3), calculateExpectedTrafficIndex(3, 945)},
+                {buildVehicles(5474), buildRoads(23), calculateExpectedTrafficIndex(23, 5474)},
+                {buildVehicles(12), buildRoads(789), calculateExpectedTrafficIndex(789, 12)},
+                {buildVehicles(3), buildRoads(1), calculateExpectedTrafficIndex(1, 3)},
         };
     }
 
-    @Test(dataProvider = "harvest-data-provider")
+    @Test(dataProvider = "traffic-data-provider")
     public void shouldCalculateHarvestIndex(Object[] params) {
         //Given
-        when(fruitController.retrieveAllFruits()).thenReturn((List<Fruit>) params[0]);
-        when(treeController.retrieveAllTrees()).thenReturn((List<Tree>) params[1]);
+        when(vehicleController.retrieveAllVehicles()).thenReturn((List<Vehicle>) params[0]);
+        when(roadController.retrieveAllRoads()).thenReturn((List<Road>) params[1]);
         //Then
-        Assert.assertEquals(harvestController.getHarvestIndex(), params[2]);
+        Assert.assertEquals(trafficController.getTrafficIndex(), params[2]);
     }
 
     @Test
-    public void shouldReturnZeroIfNoFruitsAvailable() {
+    public void shouldReturnZeroIfNoRoadsAvailable() {
         //Given
-        when(fruitController.retrieveAllFruits()).thenReturn(Collections.emptyList());
-        when(treeController.retrieveAllTrees()).thenReturn(buildTrees(1));
+        when(roadController.retrieveAllRoads()).thenReturn(Collections.emptyList());
+        when(vehicleController.retrieveAllVehicles()).thenReturn(buildVehicles(1));
         //Then
-        Assert.assertThrows(RuntimeException.class, () -> harvestController.getHarvestIndex());
+        Assert.assertThrows(RuntimeException.class, () -> trafficController.getTrafficIndex());
     }
 
     @Test
-    public void shouldReturnZeroIfNoTreesAvailable() {
+    public void shouldReturnZeroIfNoVehiclesAvailable() {
         //Given
-        when(fruitController.retrieveAllFruits()).thenReturn(buildFruits(1));
-        when(treeController.retrieveAllTrees()).thenReturn(Collections.emptyList());
+        when(roadController.retrieveAllRoads()).thenReturn(buildRoads(1));
+        when(vehicleController.retrieveAllVehicles()).thenReturn(Collections.emptyList());
         //Then
-        Assert.assertThrows(RuntimeException.class, () -> harvestController.getHarvestIndex());
+        Assert.assertThrows(RuntimeException.class, () -> trafficController.getTrafficIndex());
     }
 
 }
