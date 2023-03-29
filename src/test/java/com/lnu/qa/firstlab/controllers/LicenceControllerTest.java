@@ -2,20 +2,19 @@ package com.lnu.qa.firstlab.controllers;
 
 import com.lnu.qa.firstlab.models.Licence;
 import com.lnu.qa.firstlab.utils.RandomUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-import org.testng.log4testng.Logger;
 
 import java.util.List;
 import java.util.Set;
 
+@Slf4j
 public class LicenceControllerTest {
-
-    private final Logger log = Logger.getLogger(LicenceControllerTest.class);
 
     private LicenceController licenceController;
 
@@ -48,6 +47,15 @@ public class LicenceControllerTest {
         softAssert.assertEquals(foundLicencesById.size(), 1);
         softAssert.assertEquals(foundLicencesById.get(0), savedLicence);
         softAssert.assertAll();
+    }
+
+    @Test
+    public void shouldThrowExceptionIfTheLicenseAlreadyHasAnId() {
+        //Given
+        var licence = new Licence();
+        licence.setId("some_id");
+        //Then
+        Assert.expectThrows(RuntimeException.class, () -> licenceController.saveLicence(licence));
     }
 
 

@@ -2,12 +2,12 @@ package com.lnu.qa.firstlab.controllers;
 
 import com.lnu.qa.firstlab.models.House;
 import com.lnu.qa.firstlab.models.Vehicle;
+import lombok.extern.slf4j.Slf4j;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.testng.MockitoTestNGListener;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import org.testng.log4testng.Logger;
 
 import java.util.Collections;
 import java.util.List;
@@ -15,10 +15,9 @@ import java.util.stream.IntStream;
 
 import static org.mockito.Mockito.when;
 
+@Slf4j
 @Listeners(MockitoTestNGListener.class)
 public class WealthControllerTest {
-
-    private final Logger log = Logger.getLogger(WealthControllerTest.class);
 
     @Mock
     private HouseController houseController;

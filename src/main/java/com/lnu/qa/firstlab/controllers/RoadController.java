@@ -2,15 +2,13 @@ package com.lnu.qa.firstlab.controllers;
 
 import com.lnu.qa.firstlab.models.Road;
 import com.lnu.qa.firstlab.utils.RandomUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Slf4j
 public class RoadController {
-    private final Logger log = LogManager.getLogger(RoadController.class.getName());
     private final List<Road> roads = new ArrayList<>();
 
     public List<Road> retrieveAllRoads() {

@@ -2,12 +2,12 @@ package com.lnu.qa.firstlab.controllers;
 
 import com.lnu.qa.firstlab.models.Road;
 import com.lnu.qa.firstlab.models.Vehicle;
+import lombok.extern.slf4j.Slf4j;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.testng.MockitoTestNGListener;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import org.testng.log4testng.Logger;
 
 import java.util.Collections;
 import java.util.List;
@@ -15,10 +15,9 @@ import java.util.stream.IntStream;
 
 import static org.mockito.Mockito.when;
 
+@Slf4j
 @Listeners(MockitoTestNGListener.class)
 public class TrafficControllerTest {
-
-    private final Logger log = Logger.getLogger(TrafficControllerTest.class);
 
     @Mock
     private RoadController roadController;

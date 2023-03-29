@@ -1,19 +1,14 @@
 package com.lnu.qa.firstlab.controllers;
 
 import com.lnu.qa.firstlab.models.House;
-import com.lnu.qa.firstlab.models.House;
+import com.lnu.qa.firstlab.utils.RandomUtils;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.lnu.qa.firstlab.utils.RandomUtils;
 
-import com.lnu.qa.firstlab.utils.RandomUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-
+@Slf4j
 public class HouseController {
-    private final Logger log = LogManager.getLogger(HouseController.class.getName());
     private final List<House> houses = new ArrayList<>();
 
     public List<House> retrieveAllHouses() {

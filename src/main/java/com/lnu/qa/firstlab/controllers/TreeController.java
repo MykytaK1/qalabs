@@ -1,17 +1,14 @@
 package com.lnu.qa.firstlab.controllers;
 
-import com.lnu.qa.firstlab.models.Fruit;
 import com.lnu.qa.firstlab.models.Tree;
+import com.lnu.qa.firstlab.utils.RandomUtils;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.lnu.qa.firstlab.utils.RandomUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-
+@Slf4j
 public class TreeController {
-    private final Logger log = LogManager.getLogger(TreeController.class.getName());
     private final List<Tree> trees = new ArrayList<>();
 
     public List<Tree> retrieveAllTrees() {

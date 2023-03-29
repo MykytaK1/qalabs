@@ -3,16 +3,14 @@ package com.lnu.qa.firstlab.controllers;
 import com.lnu.qa.firstlab.models.Licence;
 import com.lnu.qa.firstlab.utils.RandomUtils;
 import lombok.AllArgsConstructor;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Slf4j
 @AllArgsConstructor
 public class LicenceController {
-    private final Logger log = LogManager.getLogger(LicenceController.class.getName());
     private final List<Licence> licences = new ArrayList<>();
 
     public List<Licence> retrieveAllLicences() {

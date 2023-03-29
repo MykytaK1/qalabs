@@ -3,6 +3,7 @@ package com.lnu.qa.firstlab.controllers;
 import com.lnu.qa.firstlab.models.Licence;
 import com.lnu.qa.firstlab.models.Vehicle;
 import com.lnu.qa.firstlab.utils.RandomUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.testng.MockitoTestNGListener;
@@ -12,16 +13,14 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-import org.testng.log4testng.Logger;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
+@Slf4j
 @Listeners(MockitoTestNGListener.class)
 public class VehicleLicenceControllerTest {
-
-    private final Logger log = Logger.getLogger(VehicleLicenceControllerTest.class);
 
     @Mock
     private VehicleController vehicleController;

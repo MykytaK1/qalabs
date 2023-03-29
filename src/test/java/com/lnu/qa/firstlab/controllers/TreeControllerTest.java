@@ -2,21 +2,19 @@ package com.lnu.qa.firstlab.controllers;
 
 import com.lnu.qa.firstlab.models.Tree;
 import com.lnu.qa.firstlab.utils.RandomUtils;
-import org.apache.logging.log4j.LogManager;
+import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-import org.testng.log4testng.Logger;
 
 import java.util.List;
 import java.util.Set;
 
+@Slf4j
 public class TreeControllerTest {
-
-    private final Logger log = Logger.getLogger(TreeControllerTest.class);
 
     private TreeController treeController;
 

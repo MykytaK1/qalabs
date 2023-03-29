@@ -2,20 +2,19 @@ package com.lnu.qa.firstlab.controllers;
 
 import com.lnu.qa.firstlab.models.House;
 import com.lnu.qa.firstlab.utils.RandomUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
-import org.testng.log4testng.Logger;
 
 import java.util.List;
 import java.util.Set;
 
+@Slf4j
 public class HouseControllerTest {
-
-    private final Logger log = Logger.getLogger(HouseControllerTest.class);
 
     private HouseController houseController;
 
