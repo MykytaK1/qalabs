@@ -1,16 +1,14 @@
 package com.lnu.qa.firstlab.controllers;
 
-import com.lnu.qa.firstlab.models.Licence;
+import com.lnu.qa.firstlab.models.License;
 import com.lnu.qa.firstlab.models.Vehicle;
 import com.lnu.qa.firstlab.utils.RandomUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.testng.MockitoTestNGListener;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -19,8 +17,7 @@ import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
 @Slf4j
-@Listeners(MockitoTestNGListener.class)
-public class VehicleLicenceControllerTest {
+public class VehicleLicenseControllerTest extends MockitoSetup {
 
     @Mock
     private VehicleController vehicleController;
@@ -44,7 +41,7 @@ public class VehicleLicenceControllerTest {
     @Test
     public void shouldActivateLicenceForVehicle() {
         //Given
-        var licence = new Licence();
+        var licence = new License();
         String licenceId = RandomUtils.generateUUID();
         licence.setId(licenceId);
         when(licenceController.getLicenceById(eq(licenceId))).thenReturn(licence);
@@ -54,27 +51,27 @@ public class VehicleLicenceControllerTest {
         vehicle.setId(vehicleId);
         when(vehicleController.getVehicleById(anyString())).thenReturn(vehicle);
         //When
-        Licence resultLicence = vehicleLicenceController.activateLicenceForVehicle(vehicleId, licenceId);
+        License resultLicense = vehicleLicenceController.activateLicenceForVehicle(vehicleId, licenceId);
         //Then
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(resultLicence.getId(), licenceId);
-        softAssert.assertTrue(resultLicence.getVehicles().contains(vehicle));
+        softAssert.assertEquals(resultLicense.getId(), licenceId);
+        softAssert.assertTrue(resultLicense.getVehicles().contains(vehicle));
         softAssert.assertAll();
     }
 
     @Test
     public void shouldNotActivateLicenceForVehicleWhenVehicleIdIsNotValid() {
         //Given
-        var licence = new Licence();
+        var licence = new License();
         String licenceId = RandomUtils.generateUUID();
         licence.setId(licenceId);
         when(licenceController.getLicenceById(eq(licenceId))).thenReturn(licence);
 
         when(vehicleController.getVehicleById(anyString())).thenReturn(null);
         //When
-        Licence resultLicence = vehicleLicenceController.activateLicenceForVehicle("not_valid", licenceId);
+        License resultLicense = vehicleLicenceController.activateLicenceForVehicle("not_valid", licenceId);
         //Then
-        Assert.assertTrue(resultLicence.getVehicles().isEmpty());
+        Assert.assertTrue(resultLicense.getVehicles().isEmpty());
     }
 
     @Test
@@ -87,9 +84,9 @@ public class VehicleLicenceControllerTest {
         vehicle.setId(vehicleId);
         when(vehicleController.getVehicleById(anyString())).thenReturn(vehicle);
         //When
-        Licence resultLicence = vehicleLicenceController.activateLicenceForVehicle("not_valid", vehicleId);
+        License resultLicense = vehicleLicenceController.activateLicenceForVehicle("not_valid", vehicleId);
         //Then
-        Assert.assertNull(resultLicence);
+        Assert.assertNull(resultLicense);
     }
 
 }

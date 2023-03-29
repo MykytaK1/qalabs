@@ -5,7 +5,6 @@ import com.lnu.qa.firstlab.models.Vehicle;
 import lombok.extern.slf4j.Slf4j;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.testng.MockitoTestNGListener;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
@@ -16,8 +15,7 @@ import java.util.stream.IntStream;
 import static org.mockito.Mockito.when;
 
 @Slf4j
-@Listeners(MockitoTestNGListener.class)
-public class TrafficControllerTest {
+public class TrafficControllerTest extends MockitoSetup {
 
     @Mock
     private RoadController roadController;
@@ -36,8 +34,8 @@ public class TrafficControllerTest {
         return IntStream.range(0, count).mapToObj(String::valueOf).map(Vehicle::new).toList();
     }
 
-    private static double calculateExpectedTrafficIndex(int Vehicles, int Roads) {
-        return (double) Math.round(10000 * ((double) Roads / Vehicles)) / 10000;
+    private static double calculateExpectedTrafficIndex(int vehicles, int roads) {
+        return (double) Math.round(10000 * ((double) roads / vehicles)) / 10000;
     }
 
 

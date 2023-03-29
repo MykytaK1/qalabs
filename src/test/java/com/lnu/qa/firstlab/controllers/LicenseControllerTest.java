@@ -1,6 +1,6 @@
 package com.lnu.qa.firstlab.controllers;
 
-import com.lnu.qa.firstlab.models.Licence;
+import com.lnu.qa.firstlab.models.License;
 import com.lnu.qa.firstlab.utils.RandomUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.Assert;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 @Slf4j
-public class LicenceControllerTest {
+public class LicenseControllerTest {
 
     private LicenceController licenceController;
 
@@ -37,22 +37,22 @@ public class LicenceControllerTest {
     @Test
     public void shouldSaveLicence() {
         //Given
-        var licence = new Licence();
+        var licence = new License();
         //When
-        Licence savedLicence = licenceController.saveLicence(licence);
+        License savedLicense = licenceController.saveLicence(licence);
         //Then
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(savedLicence.getId().length() > 0);
-        var foundLicencesById = licenceController.retrieveAllLicences().stream().filter(fr -> fr.getId().equals(savedLicence.getId())).toList();
+        softAssert.assertTrue(savedLicense.getId().length() > 0);
+        var foundLicencesById = licenceController.retrieveAllLicences().stream().filter(fr -> fr.getId().equals(savedLicense.getId())).toList();
         softAssert.assertEquals(foundLicencesById.size(), 1);
-        softAssert.assertEquals(foundLicencesById.get(0), savedLicence);
+        softAssert.assertEquals(foundLicencesById.get(0), savedLicense);
         softAssert.assertAll();
     }
 
     @Test
     public void shouldThrowExceptionIfTheLicenseAlreadyHasAnId() {
         //Given
-        var licence = new Licence();
+        var licence = new License();
         licence.setId("some_id");
         //Then
         Assert.expectThrows(RuntimeException.class, () -> licenceController.saveLicence(licence));
@@ -70,46 +70,46 @@ public class LicenceControllerTest {
         String name_1 = RandomUtils.generateUUID();
         String name_2 = RandomUtils.generateUUID();
         //When
-        Licence savedLicence_1 = licenceController.saveLicence(new Licence());
-        Licence savedLicence_2 = licenceController.saveLicence(new Licence());
+        License savedLicense_1 = licenceController.saveLicence(new License());
+        License savedLicense_2 = licenceController.saveLicence(new License());
         //Then
-        List<Licence> allLicences = licenceController.retrieveAllLicences();
+        List<License> allLicenses = licenceController.retrieveAllLicences();
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(allLicences.size(), 2);
-        softAssert.assertEquals(Set.copyOf(allLicences), Set.of(savedLicence_1, savedLicence_2));
+        softAssert.assertEquals(allLicenses.size(), 2);
+        softAssert.assertEquals(Set.copyOf(allLicenses), Set.of(savedLicense_1, savedLicense_2));
         softAssert.assertAll();
     }
 
     @Test
     public void shouldGetLicenceById() {
         //Given
-        var licence = new Licence();
-        Licence savedLicence = licenceController.saveLicence(licence);
+        var licence = new License();
+        License savedLicense = licenceController.saveLicence(licence);
         //When
-        Licence licenceById = licenceController.getLicenceById(savedLicence.getId());
+        License licenseById = licenceController.getLicenceById(savedLicense.getId());
         //Then
-        Assert.assertEquals(licenceById, savedLicence);
+        Assert.assertEquals(licenseById, savedLicense);
     }
 
     @Test
     public void shouldReturnNullIfLicenceNotFoundById() {
         //When
-        Licence resultLicence = licenceController.getLicenceById("not_valid_id");
+        License resultLicense = licenceController.getLicenceById("not_valid_id");
         //Then
-        Assert.assertNull(resultLicence);
+        Assert.assertNull(resultLicense);
     }
 
     @Test
     public void shouldRemoveLicenceById() {
         //Given
         String name = RandomUtils.generateUUID();
-        var licence = new Licence();
-        Licence savedLicence = licenceController.saveLicence(licence);
+        var licence = new License();
+        License savedLicense = licenceController.saveLicence(licence);
         //When
-        Licence licenceById = licenceController.removeLicenceById(savedLicence.getId());
+        License licenseById = licenceController.removeLicenceById(savedLicense.getId());
         //Then
         SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(licenceById, savedLicence);
+        softAssert.assertEquals(licenseById, savedLicense);
         var foundLicencesByName = licenceController.retrieveAllLicences().stream().filter(fr -> fr.getId().equals(name)).findFirst();
         softAssert.assertTrue(foundLicencesByName.isEmpty());
         softAssert.assertAll();
@@ -118,8 +118,8 @@ public class LicenceControllerTest {
     @Test
     public void shouldReturnNullIfLicenceNotFoundToRemoveById() {
         //When
-        Licence resultLicence = licenceController.removeLicenceById("not_valid_id");
+        License resultLicense = licenceController.removeLicenceById("not_valid_id");
         //Then
-        Assert.assertNull(resultLicence);
+        Assert.assertNull(resultLicense);
     }
 }

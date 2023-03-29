@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-public class Licence {
+public class License {
     private String id;
     private Set<Vehicle> vehicles = new HashSet<>();
 }

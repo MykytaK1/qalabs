@@ -1,53 +1,17 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="First_lab" verbose="1" thread-count="10" parallel="classes">
-    <test name="HarvestControllerTest">
+<suite name="First_lab" verbose="1">
+    <test name="qa_lab_1">
         <classes>
             <class name="com.lnu.qa.firstlab.controllers.HarvestControllerTest"/>
-        </classes>
-    </test>
-    <test name="FruitControllerTest">
-        <classes>
             <class name="com.lnu.qa.firstlab.controllers.FruitControllerTest"/>
-        </classes>
-    </test>
-    <test name="TreeControllerTest">
-        <classes>
             <class name="com.lnu.qa.firstlab.controllers.TreeControllerTest"/>
-        </classes>
-    </test>
-    <test name="VehicleControllerTest">
-        <classes>
             <class name="com.lnu.qa.firstlab.controllers.VehicleControllerTest"/>
-        </classes>
-    </test>
-    <test name="LicenceControllerTest">
-        <classes>
-            <class name="com.lnu.qa.firstlab.controllers.LicenceControllerTest"/>
-        </classes>
-    </test>
-    <test name="VehicleLicenceControllerTest">
-        <classes>
-            <class name="com.lnu.qa.firstlab.controllers.VehicleLicenceControllerTest"/>
-        </classes>
-    </test>
-    <test name="WealthControllerTest">
-        <classes>
+            <class name="com.lnu.qa.firstlab.controllers.LicenseControllerTest"/>
+            <class name="com.lnu.qa.firstlab.controllers.VehicleLicenseControllerTest"/>
             <class name="com.lnu.qa.firstlab.controllers.WealthControllerTest"/>
-        </classes>
-    </test>
-    <test name="HouseControllerTest">
-        <classes>
             <class name="com.lnu.qa.firstlab.controllers.HouseControllerTest"/>
-        </classes>
-    </test>
-    <test name="RoadControllerTest">
-        <classes>
             <class name="com.lnu.qa.firstlab.controllers.RoadControllerTest"/>
-        </classes>
-    </test>
-    <test name="TrafficControllerTest">
-        <classes>
             <class name="com.lnu.qa.firstlab.controllers.TrafficControllerTest"/>
         </classes>
     </test>

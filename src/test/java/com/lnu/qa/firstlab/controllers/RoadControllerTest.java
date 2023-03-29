@@ -73,13 +73,13 @@ public class RoadControllerTest {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(expectedExceptions = RuntimeException.class)
     public void shouldThrowExceptionWhenAttemptToSaveRoadWithId() {
         //Given
         var road = new Road(RandomUtils.generateUUID());
         road.setId("id");
         //Then
-        Assert.expectThrows(RuntimeException.class, () -> roadController.saveRoad(road));
+        roadController.saveRoad(road);
     }
 
     @Test

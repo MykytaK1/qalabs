@@ -5,9 +5,11 @@ import com.lnu.qa.firstlab.models.Vehicle;
 import lombok.extern.slf4j.Slf4j;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.testng.MockitoTestNGListener;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,8 +18,7 @@ import java.util.stream.IntStream;
 import static org.mockito.Mockito.when;
 
 @Slf4j
-@Listeners(MockitoTestNGListener.class)
-public class WealthControllerTest {
+public class WealthControllerTest extends MockitoSetup {
 
     @Mock
     private HouseController houseController;
