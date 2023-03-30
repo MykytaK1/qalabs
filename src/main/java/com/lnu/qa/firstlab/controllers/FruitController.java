@@ -37,6 +37,11 @@ public class FruitController {
         return resultFruit;
     }
 
+    public List<Fruit> getFruitByName(String name) {
+        log.info("Attempt to get the Fruit by name: {}", name);
+        return fruits.stream().filter(fruit -> fruit.getName().equals(name)).toList();
+    }
+
     private Fruit findFruitById(String id) {
         return fruits.stream().filter(fruit -> fruit.getId().equals(id)).findFirst().orElse(null);
     }

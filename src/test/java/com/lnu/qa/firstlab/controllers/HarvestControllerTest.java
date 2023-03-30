@@ -1,5 +1,6 @@
 package com.lnu.qa.firstlab.controllers;
 
+import com.lnu.qa.firstlab.utils.MockitoSetup;
 import com.lnu.qa.firstlab.models.Fruit;
 import com.lnu.qa.firstlab.models.Tree;
 import lombok.extern.slf4j.Slf4j;

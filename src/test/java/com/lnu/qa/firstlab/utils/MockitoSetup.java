@@ -1,4 +1,4 @@
-package com.lnu.qa.firstlab.controllers;
+package com.lnu.qa.firstlab.utils;
 
 import org.mockito.Mockito;
 import org.mockito.MockitoSession;

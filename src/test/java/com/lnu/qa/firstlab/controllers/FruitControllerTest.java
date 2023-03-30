@@ -16,6 +16,8 @@ import java.util.Set;
 @Slf4j
 public class FruitControllerTest {
 
+    private static final String TEST_FRUIT_NAME = "test-fruit-orange";
+
     private FruitController fruitController;
 
     @BeforeClass
@@ -31,58 +33,31 @@ public class FruitControllerTest {
 
     @BeforeMethod
     public void afterTest() {
-        fruitController.retrieveAllFruits().clear();
+//        fruitController.retrieveAllFruits().clear();
     }
 
-    @Test
+    @Test(priority = 0)
+    public void shouldRemoveEmptyListWhenNoFruitsAvailable() {
+        Assert.assertEquals(fruitController.retrieveAllFruits().size(), 0);
+    }
+
+    @Test(priority = 1)
     public void shouldSaveFruit() {
         //Given
-        String name = RandomUtils.generateUUID();
-        var fruit = new Fruit(name);
+        var fruit = new Fruit(TEST_FRUIT_NAME);
         //When
         Fruit savedFruit = fruitController.saveFruit(fruit);
         //Then
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertTrue(savedFruit.getId().length() > 0);
-        softAssert.assertEquals(savedFruit.getName(), name);
-        var foundFruitsByName = fruitController.retrieveAllFruits().stream().filter(fr -> fr.getName().equals(name)).toList();
+        softAssert.assertEquals(savedFruit.getName(), TEST_FRUIT_NAME);
+        var foundFruitsByName = fruitController.retrieveAllFruits().stream().filter(fr -> fr.getName().equals(TEST_FRUIT_NAME)).toList();
         softAssert.assertEquals(foundFruitsByName.size(), 1);
         softAssert.assertEquals(foundFruitsByName.get(0), savedFruit);
         softAssert.assertAll();
     }
 
-
-    @Test
-    public void shouldRemoveEmptyListWhenNoFruitsAvailable() {
-        Assert.assertEquals(fruitController.retrieveAllFruits().size(), 0);
-    }
-
-    @Test
-    public void shouldRetrieveAllFruits() {
-        //Given
-        String name_1 = RandomUtils.generateUUID();
-        String name_2 = RandomUtils.generateUUID();
-        //When
-        Fruit savedFruit_1 = fruitController.saveFruit(new Fruit(name_1));
-        Fruit savedFruit_2 = fruitController.saveFruit(new Fruit(name_2));
-        //Then
-        List<Fruit> allFruits = fruitController.retrieveAllFruits();
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(allFruits.size(), 2);
-        softAssert.assertEquals(Set.copyOf(allFruits), Set.of(savedFruit_1, savedFruit_2));
-        softAssert.assertAll();
-    }
-
-    @Test
-    public void shouldThrowExceptionWhenAttemptToSaveFruitWithId() {
-        //Given
-        var fruit = new Fruit(RandomUtils.generateUUID());
-        fruit.setId("id");
-        //Then
-        Assert.expectThrows(RuntimeException.class, () -> fruitController.saveFruit(fruit));
-    }
-
-    @Test
+    @Test(priority = 1)
     public void shouldGetFruitById() {
         //Given
         String name = RandomUtils.generateUUID();
@@ -94,12 +69,29 @@ public class FruitControllerTest {
         Assert.assertEquals(fruitById, savedFruit);
     }
 
-    @Test
-    public void shouldReturnNullIfFruitNotFoundById() {
+    @Test(dependsOnMethods = "shouldSaveFruit", priority = 2)
+    public void shouldRetrieveAllFruits() {
+        //Given
+        String name_1 = RandomUtils.generateUUID();
+        String name_2 = RandomUtils.generateUUID();
         //When
-        Fruit resultFruit = fruitController.getFruitById("not_valid_id");
+        Fruit savedFruit_1 = fruitController.saveFruit(new Fruit(name_1));
+        Fruit savedFruit_2 = fruitController.saveFruit(new Fruit(name_2));
         //Then
-        Assert.assertNull(resultFruit);
+        List<Fruit> allFruits = fruitController.retrieveAllFruits();
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(allFruits.size(), 4);
+        softAssert.assertTrue(Set.copyOf(allFruits).containsAll(Set.of(savedFruit_1, savedFruit_2)));
+        softAssert.assertAll();
+    }
+
+    @Test(dependsOnMethods = "shouldSaveFruit", priority = 2)
+    public void shouldGetFruitsByName() {
+        //When
+        List<Fruit> fruitsByName = fruitController.getFruitByName(TEST_FRUIT_NAME);
+        //Then
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(fruitsByName.size() == 1);
     }
 
     @Test
@@ -116,6 +108,23 @@ public class FruitControllerTest {
         var foundFruitsByName = fruitController.retrieveAllFruits().stream().filter(fr -> fr.getName().equals(name)).findFirst();
         softAssert.assertTrue(foundFruitsByName.isEmpty());
         softAssert.assertAll();
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenAttemptToSaveFruitWithId() {
+        //Given
+        var fruit = new Fruit(RandomUtils.generateUUID());
+        fruit.setId("id");
+        //Then
+        Assert.expectThrows(RuntimeException.class, () -> fruitController.saveFruit(fruit));
+    }
+
+    @Test
+    public void shouldReturnNullIfFruitNotFoundById() {
+        //When
+        Fruit resultFruit = fruitController.getFruitById("not_valid_id");
+        //Then
+        Assert.assertNull(resultFruit);
     }
 
     @Test

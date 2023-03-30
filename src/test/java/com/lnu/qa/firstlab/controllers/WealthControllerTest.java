@@ -1,5 +1,6 @@
 package com.lnu.qa.firstlab.controllers;
 
+import com.lnu.qa.firstlab.utils.MockitoSetup;
 import com.lnu.qa.firstlab.models.House;
 import com.lnu.qa.firstlab.models.Vehicle;
 import lombok.extern.slf4j.Slf4j;

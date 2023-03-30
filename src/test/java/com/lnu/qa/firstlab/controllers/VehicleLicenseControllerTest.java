@@ -1,5 +1,6 @@
 package com.lnu.qa.firstlab.controllers;
 
+import com.lnu.qa.firstlab.utils.MockitoSetup;
 import com.lnu.qa.firstlab.models.License;
 import com.lnu.qa.firstlab.models.Vehicle;
 import com.lnu.qa.firstlab.utils.RandomUtils;
