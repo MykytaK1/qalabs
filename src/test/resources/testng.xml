@@ -4,7 +4,7 @@
     <test name="qa_lab_1">
         <classes>
             <class name="com.lnu.qa.firstlab.controllers.HarvestControllerTest"/>
-            <class name="com.lnu.qa.firstlab.controllers.FruitControllerTest"/>
+            <class name="com.lnu.qa.secondlab.controllers.FruitControllerTest"/>
             <class name="com.lnu.qa.firstlab.controllers.TreeControllerTest"/>
             <class name="com.lnu.qa.firstlab.controllers.VehicleControllerTest"/>
             <class name="com.lnu.qa.firstlab.controllers.LicenseControllerTest"/>

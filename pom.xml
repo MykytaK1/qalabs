@@ -39,11 +39,19 @@
         </dependency>
 
         <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-testng</artifactId>
-            <version>0.4.30</version>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.8.3</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.3.2</version>
+            <scope>test</scope>
+        </dependency>
+
 
     </dependencies>
 
@@ -60,32 +68,6 @@
                     <parallel>classes</parallel>
                     <threadCount>5</threadCount>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.7</version>
-                <configuration>
-                    <excludes>
-                        <exclude>com/lnu/qa/firstlab/models/*</exclude>
-                        <exclude>com/lnu/qa/firstlab/utils/*</exclude>
-                    </excludes>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
