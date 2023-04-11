@@ -14,16 +14,16 @@ public class SignInYahooPage {
 
     public void signIn(String email, String password) {
         driver
-                .findElement(By.xpath("//input[@id='identifierId']"))
+                .findElement(By.xpath("//input[@id='login-username']"))
                 .sendKeys(email);
         driver
-                .findElement(By.xpath("//div[@id='identifierNext']"))
+                .findElement(By.xpath("//input[@id='login-signin']"))
                 .click();
         driver
-                .findElement(By.xpath("//input[@name='Passwd']"))
+                .findElement(By.xpath("//input[@id='login-passwd']"))
                 .sendKeys(password);
         driver
-                .findElement(By.xpath("//div[@id='passwordNext']"))
+                .findElement(By.xpath("//button[@id='login-signin']"))
                 .click();
         TestUtils.sleep(Duration.ofSeconds(3));
 
