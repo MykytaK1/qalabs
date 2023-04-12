@@ -51,8 +51,6 @@
             <version>5.3.2</version>
             <scope>test</scope>
         </dependency>
-
-
     </dependencies>
 
     <build>
@@ -66,7 +64,7 @@
                         <file>${project.basedir}/src/test/resources/testng.xml</file>
                     </suiteXmlFiles>
                     <parallel>classes</parallel>
-                    <threadCount>5</threadCount>
+                    <threadCount>1</threadCount>
                 </configuration>
             </plugin>
             <plugin>
