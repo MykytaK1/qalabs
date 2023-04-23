@@ -11,7 +11,6 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-
     <xsd:element name="getFruitResponse">
         <xsd:complexType>
             <xsd:sequence>
@@ -19,15 +18,12 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-
     <xsd:element name="getFruitsRequest">
         <xsd:complexType>
             <xsd:sequence>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-
-
     <xsd:element name="getFruitsResponse">
         <xsd:complexType>
             <xsd:sequence>
@@ -35,22 +31,18 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-
     <xsd:element name="removeAllFruitsRequest">
         <xsd:complexType>
             <xsd:sequence>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-
-
     <xsd:element name="removeAllFruitsResponse">
         <xsd:complexType>
             <xsd:sequence>
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-
     <xsd:element name="createFruitRequest">
         <xsd:complexType>
             <xsd:sequence>
@@ -58,7 +50,6 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-
     <xsd:element name="createFruitResponse">
         <xsd:complexType>
             <xsd:sequence>
@@ -66,7 +57,6 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-
     <xsd:element name="updateFruitRequest">
         <xsd:complexType>
             <xsd:sequence>
@@ -74,7 +64,6 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-
     <xsd:element name="updateFruitResponse">
         <xsd:complexType>
             <xsd:sequence>
@@ -82,7 +71,6 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-
     <xsd:element name="removeFruitRequest">
         <xsd:complexType>
             <xsd:sequence>
@@ -90,7 +78,6 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-
     <xsd:element name="removeFruitResponse">
         <xsd:complexType>
             <xsd:sequence>
@@ -98,7 +85,6 @@
             </xsd:sequence>
         </xsd:complexType>
     </xsd:element>
-
     <xsd:complexType name="fruit">
         <xsd:sequence>
             <xsd:element name="id" type="xsd:string"/>
