@@ -14,6 +14,17 @@ public class FruitRepository {
 
     private final List<Fruit> fruits = new ArrayList<>();
 
+    public List<Fruit> retrieveAllFruits() {
+        log.info("Retrieve all fruits");
+        return fruits;
+    }
+
+    public void removeAllFruits() {
+        log.info("Attempt to remove all fruits");
+        fruits.clear();
+        log.info("Fruits ere removed");
+    }
+
     public Fruit saveFruit(Fruit fruit) {
         log.info("Attempt to save the Fruit: {}", fruit);
         if (fruit.getId() != null) {

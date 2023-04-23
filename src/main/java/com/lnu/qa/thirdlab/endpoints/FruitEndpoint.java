@@ -15,6 +15,21 @@ public class FruitEndpoint {
 
     private FruitRepository fruitRepository;
 
+    @PayloadRoot(namespace = NAMESPACE_URL, localPart = "removeAllFruitsRequest")
+    @ResponsePayload
+    public RemoveAllFruitsResponse removeAllFruits() {
+        fruitRepository.removeAllFruits();
+        return new RemoveAllFruitsResponse();
+    }
+
+    @PayloadRoot(namespace = NAMESPACE_URL, localPart = "getFruitsRequest")
+    @ResponsePayload
+    public GetFruitsResponse getFruits() {
+        GetFruitsResponse response = new GetFruitsResponse();
+        response.getFruits().addAll(fruitRepository.retrieveAllFruits());
+        return response;
+    }
+
     @PayloadRoot(namespace = NAMESPACE_URL, localPart = "getFruitRequest")
     @ResponsePayload
     public GetFruitResponse getFruit(@RequestPayload GetFruitRequest request) {
