@@ -17,7 +17,8 @@ import java.util.Properties;
 public class ChromeTest {
     private final static String PROPERTIES_PATH = "selenium.properties";
 
-    private ThreadLocal<WebDriver> webDriverThreadLocal = new ThreadLocal<>();
+    @Getter
+    private static ThreadLocal<ChromeDriver> webDriverThreadLocal = new ThreadLocal<>();
     @Getter
     private Properties properties;
 
@@ -41,6 +42,7 @@ public class ChromeTest {
     @BeforeMethod
     public void setupTest() {
         var chromeOptions = new ChromeOptions();
+//        chromeOptions.addArguments("--headless=chrome");
         webDriverThreadLocal.set(new ChromeDriver(chromeOptions));
         WebDriver.Options options = getWebDriver().manage();
         options.timeouts().implicitlyWait(Duration.ofSeconds(Integer.parseInt(properties.get("selenium.wait.time").toString())));

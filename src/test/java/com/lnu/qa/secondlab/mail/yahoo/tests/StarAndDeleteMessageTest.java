@@ -1,11 +1,12 @@
 package com.lnu.qa.secondlab.mail.yahoo.tests;
 
+import com.lnu.qa.secondlab.allure.TestListener;
 import com.lnu.qa.secondlab.mail.yahoo.YahooMailTest;
 import com.lnu.qa.secondlab.mail.yahoo.pageobject.MainPage;
 import com.lnu.qa.secondlab.mail.yahoo.pageobject.MessagesActionPage;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-
 public class StarAndDeleteMessageTest extends YahooMailTest {
 
     @Test

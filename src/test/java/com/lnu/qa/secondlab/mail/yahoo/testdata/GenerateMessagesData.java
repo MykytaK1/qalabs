@@ -20,6 +20,11 @@ public class GenerateMessagesData extends YahooMailTest {
         var composeView = new ComposePage(getWebDriver());
         for (int i = 0; i < 50; i++) {
             composeView.composeNewMail(getYahooEmailAddress(),  uuid(), uuid());
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             composeView.sendNewMail();
         }
     }

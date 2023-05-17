@@ -1,5 +1,6 @@
 package com.lnu.qa.secondlab.mail.yahoo.pageobject;
 
+import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,17 +15,20 @@ public class InboxMessagesPage {
 
     private WebDriver driver;
 
+    @Step("Find Message")
     public WebElement findMessage(String subject) {
         return new WebDriverWait(driver, Duration.ofMinutes(1))
                 .until(ExpectedConditions.visibilityOf(driver
                 .findElement(By.xpath("//span[text()='" + subject + "']"))));
     }
 
+    @Step("Open Message")
     public void openMessage(WebElement message) {
         var parent = message.findElement(By.xpath("ancestor::div[contains(@class, 'message-list-item')]"));
         parent.click();
     }
 
+    @Step("Select Message")
     public void selectMessage(WebElement message) {
         var parent = message.findElement(By.xpath("ancestor::div[contains(@class, 'message-list-item')]"));
         var checkbox = parent

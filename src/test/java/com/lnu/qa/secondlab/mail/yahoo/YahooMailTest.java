@@ -1,8 +1,11 @@
 package com.lnu.qa.secondlab.mail.yahoo;
 
 import com.lnu.qa.secondlab.ChromeTest;
+import com.lnu.qa.secondlab.allure.TestListener;
 import com.lnu.qa.secondlab.mail.yahoo.pageobject.SignInPage;
+import org.testng.annotations.Listeners;
 
+//@Listeners({TestListener.class})
 public class YahooMailTest extends ChromeTest {
 
     public void logIn(){

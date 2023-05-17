@@ -1,9 +1,11 @@
 package com.lnu.qa.secondlab.mail.yahoo.tests;
 
+import com.lnu.qa.secondlab.allure.TestListener;
 import com.lnu.qa.secondlab.mail.yahoo.YahooMailTest;
 import com.lnu.qa.secondlab.mail.yahoo.pageobject.ComposePage;
 import com.lnu.qa.secondlab.mail.yahoo.pageobject.DraftMessagesPage;
 import com.lnu.qa.secondlab.mail.yahoo.pageobject.MainPage;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.lnu.qa.secondlab.TestUtils.uuid;

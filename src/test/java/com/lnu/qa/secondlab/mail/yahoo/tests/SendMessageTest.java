@@ -1,5 +1,6 @@
 package com.lnu.qa.secondlab.mail.yahoo.tests;
 
+import com.lnu.qa.secondlab.allure.TestListener;
 import com.lnu.qa.secondlab.mail.yahoo.YahooMailTest;
 import com.lnu.qa.secondlab.mail.yahoo.pageobject.ComposePage;
 import com.lnu.qa.secondlab.mail.yahoo.pageobject.MainPage;
@@ -7,11 +8,12 @@ import com.lnu.qa.secondlab.mail.yahoo.pageobject.SentMessagesPage;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.ITestListener;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.lnu.qa.secondlab.TestUtils.uuid;
-
 public class SendMessageTest extends YahooMailTest {
 
 
