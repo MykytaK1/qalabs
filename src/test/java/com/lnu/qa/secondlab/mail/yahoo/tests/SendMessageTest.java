@@ -1,6 +1,5 @@
 package com.lnu.qa.secondlab.mail.yahoo.tests;
 
-import com.lnu.qa.secondlab.allure.TestListener;
 import com.lnu.qa.secondlab.mail.yahoo.YahooMailTest;
 import com.lnu.qa.secondlab.mail.yahoo.pageobject.ComposePage;
 import com.lnu.qa.secondlab.mail.yahoo.pageobject.MainPage;
@@ -8,12 +7,11 @@ import com.lnu.qa.secondlab.mail.yahoo.pageobject.SentMessagesPage;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
-import org.testng.ITestListener;
 import org.testng.annotations.DataProvider;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.lnu.qa.secondlab.TestUtils.uuid;
+
 public class SendMessageTest extends YahooMailTest {
 
 
@@ -24,9 +22,9 @@ public class SendMessageTest extends YahooMailTest {
         //Send mail
         var composeView = new ComposePage(getWebDriver());
         composeView.composeNewMail(getYahooEmailAddress(), subject, uuid());
-         sleep();
+        sleep();
         composeView.sendNewMail();
-         sleep();
+        sleep();
         //Open sent messages
         var mainPage = new MainPage(getWebDriver());
         mainPage.openSentMessages();
@@ -34,9 +32,12 @@ public class SendMessageTest extends YahooMailTest {
         var sentMessagesPage = new SentMessagesPage(getWebDriver());
         WebElement message = sentMessagesPage.findMessage(subject);
         sentMessagesPage.selectMessage(message);
-         sleep();
-        sentMessagesPage.deleteMessage();
-         sleep();
+        sleep();
+        var rnd = Math.random() * 10;
+        if (rnd < 1) {
+            sentMessagesPage.deleteMessage();
+        }
+        sleep();
         //Then
         Assert.expectThrows(NoSuchElementException.class, () -> sentMessagesPage.findMessage(subject));
     }

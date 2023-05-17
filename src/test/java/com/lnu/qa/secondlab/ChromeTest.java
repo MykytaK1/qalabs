@@ -61,8 +61,8 @@ public class ChromeTest {
         sleep(Integer.parseInt(properties.get("tests.sleep.time").toString()));
     }
 
-    public void sleep(int seconds){
-        TestUtils.sleep(Duration.ofSeconds(seconds));
+    public void sleep(int millis){
+        TestUtils.sleep(Duration.ofMillis(millis));
     }
 
 }

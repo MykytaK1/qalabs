@@ -14,10 +14,13 @@ public class TestListener implements TestLifecycleListener {
 
     @Override
     public void beforeTestStop(TestResult result) {
-        if (result.getStatus().equals(Status.FAILED) || result.getStatus().equals(Status.BROKEN)) {
+        if (result.getStatus().equals(Status.FAILED)
+                || result.getStatus().equals(Status.BROKEN)) {
             ChromeDriver webDriver = ChromeTest.getWebDriverThreadLocal().get();
             byte[] screenshot = webDriver.getScreenshotAs(OutputType.BYTES);
-            Allure.addAttachment(result.getName(), "image/png", new ByteArrayInputStream(screenshot), ".png");
+            Allure.addAttachment(result.getName(), "image/png",
+                    new ByteArrayInputStream(screenshot),
+                    ".png");
         }
     }
 }
